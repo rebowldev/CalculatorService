@@ -16,16 +16,19 @@ namespace CalculatorService.Api.Filters
 
 		public void Apply(OpenApiOperation operation, OperationFilterContext context)
 		{
-			if (operation.Parameters == null)
-				operation.Parameters = new List<OpenApiParameter>();
-
-			operation.Parameters.Add(new OpenApiParameter()
+			if (context.ApiDescription.RelativePath.StartsWith("calculator"))
 			{
-				Name = _headerKey,
-				In = ParameterLocation.Header,
-				Required = false,
-				Schema = new OpenApiSchema() { Type = "string" }
-			});
+				if (operation.Parameters == null)
+					operation.Parameters = new List<OpenApiParameter>();
+
+				operation.Parameters.Add(new OpenApiParameter()
+				{
+					Name = _headerKey,
+					In = ParameterLocation.Header,
+					Required = false,
+					Schema = new OpenApiSchema() { Type = "string" }
+				});
+			}
 		}
 	}
 }
