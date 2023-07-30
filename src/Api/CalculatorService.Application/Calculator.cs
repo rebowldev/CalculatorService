@@ -11,5 +11,10 @@ namespace CalculatorService.Application
 			else
 				return null;
 		}
+
+		public double Sub(double minuend, double subtrahend)
+		{
+			return minuend - subtrahend;
+		}
 	}
 }

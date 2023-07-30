@@ -45,6 +45,11 @@ namespace CalculatorService.Api.Middlewares
 				case "/calculator/add":
 					await SaveOperation<AddRequest, AddResponse>("Sum", trackerId, requestBody, responseBody);					
 					break;
+
+				case "/calculator/sub":
+					await SaveOperation<SubRequest, SubResponse>("Sub", trackerId, requestBody, responseBody);
+					break;
+
 				default:
 					break;
 			}

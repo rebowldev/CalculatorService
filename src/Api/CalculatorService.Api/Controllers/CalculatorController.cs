@@ -45,5 +45,29 @@ namespace CalculatorService.Api.Controllers
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
 		}
+
+		[HttpPost("sub"), FormatFilter]
+		public IActionResult Sub([FromBody] SubRequest request, [FromQuery] string? format = "json")
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					double? result = _calculator.Sub(request.Minuend, request.Subtrahend);
+
+					var response = new SubResponse { Difference = result.Value };
+					return Ok(response);
+				}
+				else
+				{
+					return BadRequest(ErrorResponse.BadRequest(ModelState));
+				}
+			}
+			catch (Exception ex)
+			{
+				// TODO: Should not return exception details to client
+				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+			}
+		}
 	}
 }

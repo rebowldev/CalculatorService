@@ -2,14 +2,14 @@
 
 namespace CalculatorService.Model.DTO
 {
-	public class AddResponse
+	public class SubResponse
 	{
-		[JsonPropertyName("Sum")]
-		public double Sum { get; set; }
+		[JsonPropertyName("Difference")]
+		public double Difference { get; set; }
 
 		public override string ToString()
 		{
-			return Sum.ToString();
+			return Difference.ToString();
 		}
 	}
 }

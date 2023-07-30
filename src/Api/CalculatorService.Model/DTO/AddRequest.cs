@@ -5,7 +5,7 @@ namespace CalculatorService.Model.DTO
 {
 	public class AddRequest
 	{
-		[JsonPropertyName("addends")]
+		[JsonPropertyName("Addends")]
 		[Required, MinLength(2)]
 		public double[] Addends { get; set; } = new double[0];
 
