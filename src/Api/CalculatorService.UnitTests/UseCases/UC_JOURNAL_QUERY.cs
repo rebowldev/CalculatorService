@@ -37,5 +37,29 @@ namespace CalculatorService.UnitTests.UseCases
 			objectResult.Value.Should().BeOfType<JournalResponse>();
 			((JournalResponse)objectResult.Value).Operations.Count.Should().Be(2);
 		}
+
+		[Fact]
+		public async Task SaveOperation()
+		{
+			// Arrange
+			string targetTrackerId = "1";
+
+			ITrackerService<OperationInfo> tracker = new InMemoryTrackerService<OperationInfo>();
+			string trackerId = Guid.NewGuid().ToString();
+			var operation = new OperationInfo { Operation = "Sum", Calculation = "1 + 1 = 2", Date = DateTime.UtcNow };
+
+			// Act
+			await tracker.SaveOperation(trackerId, operation);
+
+			// Assert
+			var operations = await tracker.GetOperationsByTracker(trackerId);
+
+			operations.Should().NotBeNull();
+			operations.Should().BeOfType<List<OperationInfo>>();
+			operations.Count.Should().Be(1);
+			operations.First().Operation.Should().Be(operation.Operation);
+			operations.First().Calculation.Should().Be(operation.Calculation);
+			operations.First().Date.Should().Be(operation.Date);
+		}
 	}
 }
