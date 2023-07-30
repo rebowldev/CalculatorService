@@ -50,6 +50,10 @@ namespace CalculatorService.Api.Middlewares
 					await SaveOperation<SubRequest, SubResponse>("Sub", trackerId, requestBody, responseBody);
 					break;
 
+				case "/calculator/mult":
+					await SaveOperation<MultRequest, MultResponse>("Mult", trackerId, requestBody, responseBody);
+					break;
+
 				default:
 					break;
 			}

@@ -16,5 +16,13 @@ namespace CalculatorService.Application
 		{
 			return minuend - subtrahend;
 		}
+
+		public double? Mult(params double[] factors)
+		{
+			if (factors?.Length >= 2)
+				return factors.Aggregate(1, (double a, double b) => a * b);
+			else
+				return null;
+		}
 	}
 }
