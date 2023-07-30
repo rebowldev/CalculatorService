@@ -5,37 +5,59 @@ using System.Text.Json;
 
 namespace CalculatorService.Api.Middlewares
 {
-	public class JournalMiddleware
+	public class RequestHandlerMiddleware
 	{
-		private readonly RequestDelegate _next;
+		private readonly ILogger _logger;
+
+		private readonly RequestDelegate _next;		
 		private readonly ITrackerService<OperationInfo> _trackerService;
 
-		public JournalMiddleware(RequestDelegate next, ITrackerService<OperationInfo> trackerService)
+		private string _requestBody = string.Empty;
+		private string _responseBody = string.Empty;
+
+		public RequestHandlerMiddleware(
+			RequestDelegate next,
+			ILoggerFactory loggerFactory,
+			ITrackerService<OperationInfo> trackerService)
 		{
 			_next = next;
+			_logger = loggerFactory.CreateLogger<RequestHandlerMiddleware>();
 			_trackerService = trackerService;
 		}
 
 		public async Task InvokeAsync(HttpContext context)
 		{
+			await GetRequestAndResponse(context);
+
+			if (context.Request.Method != "OPTIONS")
+				await LogRequestInfo(context.Request.Path.ToString(), context.Response.StatusCode);
+
 			if (context.Request.Headers.TryGetValue(_trackerService.HeaderKey, out var trackerId))
 			{
 				if (context.Request.Path.StartsWithSegments(new PathString("/calculator"))
 					&& context.Response.StatusCode == (int)HttpStatusCode.OK)
 				{
-					(string, string) requestAndResponse = await GetRequestAndResponse(context);
-
 					await SaveOperationInfo(
 						trackerId,
-						requestAndResponse.Item1,
-						requestAndResponse.Item2,
+						_requestBody,
+						_responseBody,
 						context.Request.Path);
 				}				
 			}
+		}
+
+		private async ValueTask LogRequestInfo(string path, int statusCode)
+		{
+			string message = $"{path} | {statusCode} | Request: {_requestBody} | Response {_responseBody}";
+
+			if (statusCode >= 200 & statusCode < 300)
+				_logger.LogInformation(message);
+
+			else if (statusCode >= 400 & statusCode < 500)
+				_logger.LogWarning(message);
+
 			else
-			{
-				await _next(context);
-			}
+				_logger.LogError(message);
 		}
 
 		private async ValueTask SaveOperationInfo(string trackerId, string requestBody, string responseBody, PathString path)
@@ -81,29 +103,26 @@ namespace CalculatorService.Api.Middlewares
 			await _trackerService.SaveOperation(trackerId, operation);
 		}
 
-		private async ValueTask<(string, string)> GetRequestAndResponse(HttpContext context)
+		private async ValueTask GetRequestAndResponse(HttpContext context)
 		{
 			context.Request.EnableBuffering();
 
 			using StreamReader requestReader = new StreamReader(context.Request.Body);
-			string requestBody = await requestReader.ReadToEndAsync();
+			_requestBody = await requestReader.ReadToEndAsync();
 			context.Request.Body.Position = 0;
 
 			Stream originalResponseBody = context.Response.Body;
 
-			using Stream newResponseBody = new MemoryStream();
-			context.Response.Body = newResponseBody;
+			using Stream responseBody = new MemoryStream();
+			context.Response.Body = responseBody;
+			await _next.Invoke(context);
 
-			await _next(context);
-
-			newResponseBody.Position = 0;
+			responseBody.Seek(0, SeekOrigin.Begin);
 			using StreamReader responseReader = new StreamReader(context.Response.Body);
-			var responseBody = await responseReader.ReadToEndAsync();
+			_responseBody = await responseReader.ReadToEndAsync();
 
-			newResponseBody.Position = 0;
-			await newResponseBody.CopyToAsync(originalResponseBody);
-
-			return (requestBody, responseBody);
+			responseBody.Seek(0, SeekOrigin.Begin);
+			await responseBody.CopyToAsync(originalResponseBody);
 		}
 	}
 }

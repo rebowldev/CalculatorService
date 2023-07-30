@@ -1,5 +1,5 @@
+using CalculatorService.Api.Extensions;
 using CalculatorService.Api.Filters;
-using CalculatorService.Api.Middlewares;
 using CalculatorService.Application;
 using CalculatorService.Interfaces.Application;
 using CalculatorService.Interfaces.Infrastructure;
@@ -26,8 +26,8 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-// Uses Journal Middleware to track operations when tracking ID is give within request headers
-app.UseJournalMiddleware();
+// Use middleware that handles loggin and operations tracking
+app.UseRequestHandlerMiddleware();
 
 app.UseHttpsRedirection();
 
