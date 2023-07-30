@@ -24,5 +24,16 @@ namespace CalculatorService.Application
 			else
 				return null;
 		}
+
+		public (int, int) Div(int dividend, int divisor)
+		{
+			if (dividend == 0)
+				throw new DivideByZeroException();
+
+			int quotient = dividend / divisor;
+			int remainder = dividend % divisor;
+
+			return (quotient, remainder);
+		}
 	}
 }

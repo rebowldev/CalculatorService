@@ -100,5 +100,37 @@ namespace CalculatorService.Api.Controllers
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
 		}
+
+		[HttpPost("div"), FormatFilter]
+		public IActionResult Div([FromBody] DivRequest request, [FromQuery] string? format = "json")
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					(int, int) result = _calculator.Div(request.Dividend, request.Divisor);
+
+					var response = new DivResponse
+					{
+						Quotient = result.Item1,
+						Remainder = result.Item2
+					};
+					return Ok(response);
+				}
+				else
+				{
+					return BadRequest(ErrorResponse.BadRequest(ModelState));
+				}
+			}
+			catch (DivideByZeroException ex)
+			{
+				return BadRequest(ErrorResponse.BadRequest("Unable to divide by zero"));
+			}
+			catch (Exception ex)
+			{
+				// TODO: Should not return exception details to client
+				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+			}
+		}
 	}
 }
