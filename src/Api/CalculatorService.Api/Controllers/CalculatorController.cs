@@ -132,5 +132,29 @@ namespace CalculatorService.Api.Controllers
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
 		}
+
+		[HttpPost("sqrt"), FormatFilter]
+		public IActionResult Sqrt([FromBody] SqrtRequest request, [FromQuery] string? format = "json")
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					double? result = _calculator.Sqrt(request.Number);
+
+					var response = new SqrtResponse { Square = result.Value };
+					return Ok(response);
+				}
+				else
+				{
+					return BadRequest(ErrorResponse.BadRequest(ModelState));
+				}
+			}
+			catch (Exception ex)
+			{
+				// TODO: Should not return exception details to client
+				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+			}
+		}
 	}
 }

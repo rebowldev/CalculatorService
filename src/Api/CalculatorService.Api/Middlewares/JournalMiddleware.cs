@@ -58,6 +58,10 @@ namespace CalculatorService.Api.Middlewares
 					await SaveOperation<DivRequest, DivResponse>("Div", trackerId, requestBody, responseBody);
 					break;
 
+				case "/calculator/sqrt":
+					await SaveOperation<SqrtRequest, SqrtResponse>("Sqrt", trackerId, requestBody, responseBody);
+					break;
+
 				default:
 					break;
 			}

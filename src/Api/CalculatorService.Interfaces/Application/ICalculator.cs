@@ -31,5 +31,12 @@
 		/// <param name="divisor">Divisor</param>
 		/// <returns>Quotien and remainder of the divison</returns>
 		(int, int) Div(int dividend, int divisor);
+
+		/// <summary>
+		/// Returns the square root of a number
+		/// </summary>
+		/// <param name="number">Input number</param>
+		/// <returns>The square root of input number</returns>
+		double Sqrt(double number);
 	}
 }

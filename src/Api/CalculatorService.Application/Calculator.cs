@@ -35,5 +35,10 @@ namespace CalculatorService.Application
 
 			return (quotient, remainder);
 		}
+
+		public double Sqrt(double number)
+		{
+			return Math.Sqrt(Math.Abs(number));
+		}
 	}
 }
