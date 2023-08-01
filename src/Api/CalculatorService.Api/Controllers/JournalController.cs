@@ -8,11 +8,13 @@ namespace CalculatorService.Api.Controllers
 	[ApiController]
 	public class JournalController : ControllerBase
 	{
+		private readonly ILogger _logger;
 		private readonly ITrackerService<OperationInfo> _trackerService;
 
-		public JournalController(ITrackerService<OperationInfo> trackerService)
+		public JournalController(ITrackerService<OperationInfo> trackerService, ILoggerFactory loggerFactory)
 		{
 			_trackerService = trackerService;
+			_logger = loggerFactory.CreateLogger<JournalController>();
 		}
 
 		[HttpPost("query"), FormatFilter]
@@ -33,6 +35,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}

@@ -1,10 +1,12 @@
 ﻿using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
+using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
 namespace CalculatorService.Api.Middlewares
 {
+	// TODO: Refactor since it does not meet Single Responsability principle
 	public class RequestHandlerMiddleware
 	{
 		private readonly ILogger _logger;
@@ -27,10 +29,10 @@ namespace CalculatorService.Api.Middlewares
 
 		public async Task InvokeAsync(HttpContext context)
 		{
-			await GetRequestAndResponse(context);
+			await ProcessRequestAndResponse(context);
 
 			if (context.Request.Method != "OPTIONS")
-				await LogRequestInfo(context.Request.Path.ToString(), context.Response.StatusCode);
+				await LogRequest(context.Request.Path, context.Response.StatusCode);
 
 			if (context.Request.Headers.TryGetValue(_trackerService.HeaderKey, out var trackerId))
 			{
@@ -46,9 +48,9 @@ namespace CalculatorService.Api.Middlewares
 			}
 		}
 
-		private async ValueTask LogRequestInfo(string path, int statusCode)
+		private async ValueTask LogRequest(string path, int statusCode)
 		{
-			string message = $"{path} | {statusCode} | Request: {_requestBody} | Response {_responseBody}";
+			string message = $"{path} | Request: {_requestBody} | Response: {_responseBody}";
 
 			if (statusCode >= 200 & statusCode < 300)
 				_logger.LogInformation(message);
@@ -100,15 +102,18 @@ namespace CalculatorService.Api.Middlewares
 				Calculation = $"{request.ToString()} = {response.ToString()}",
 				Date = DateTime.UtcNow
 			};
+
+			_logger.LogDebug($"Save operation: '{operation.Operation}' [{operation.Calculation}] for trackerId '{trackerId}'");
+
 			await _trackerService.SaveOperation(trackerId, operation);
 		}
 
-		private async ValueTask GetRequestAndResponse(HttpContext context)
+		private async ValueTask ProcessRequestAndResponse(HttpContext context)
 		{
 			context.Request.EnableBuffering();
 
 			using StreamReader requestReader = new StreamReader(context.Request.Body);
-			_requestBody = await requestReader.ReadToEndAsync();
+			_requestBody = (await requestReader.ReadToEndAsync()).Replace("\n", string.Empty);
 			context.Request.Body.Position = 0;
 
 			Stream originalResponseBody = context.Response.Body;

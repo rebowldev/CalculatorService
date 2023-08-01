@@ -5,6 +5,7 @@ using CalculatorService.Interfaces.Application;
 using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
 using CalculatorService.Tracker;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config => config.OperationFilter<JournalTrackingFilter>());
+
+builder.Host.UseNLog();
 
 var app = builder.Build();
 

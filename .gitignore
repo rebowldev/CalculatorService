@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/Api/CalculatorService.Api/logsinternal-nlog.txt

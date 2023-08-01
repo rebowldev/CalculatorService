@@ -8,11 +8,13 @@ namespace CalculatorService.Api.Controllers
 	[ApiController]
 	public class CalculatorController : ControllerBase
 	{
+		private readonly ILogger _logger;
 		private readonly ICalculator _calculator;
 
-		public CalculatorController(ICalculator calculator)
+		public CalculatorController(ICalculator calculator, ILoggerFactory loggerFactory)
 		{
 			_calculator = calculator;
+			_logger = loggerFactory.CreateLogger<CalculatorController>();
 		}
 
 		[HttpPost("add"), FormatFilter]
@@ -41,6 +43,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
@@ -65,6 +68,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
@@ -96,6 +100,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
@@ -128,6 +133,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
@@ -152,6 +158,7 @@ namespace CalculatorService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				// TODO: Should not return exception details to client
 				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
 			}
