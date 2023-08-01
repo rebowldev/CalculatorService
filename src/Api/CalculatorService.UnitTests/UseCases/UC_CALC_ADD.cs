@@ -69,33 +69,6 @@ namespace CalculatorService.UnitTests.UseCases
 			((AddResponse)objectResult.Value).Sum.Should().Be(addends.Sum());
 		}
 
-		[Theory]
-		[InlineData(new double[0])]
-		[InlineData(new double[] { 644.681 })]
-		public void Fail_LessThanTwoAddends(double[] addends)
-		{
-			// Arrange
-			var controller = new CalculatorController(new Calculator(), _loggerFactory);
-			var request = new AddRequest
-			{
-				Addends = addends
-			};
-
-			// Act
-			var result = controller.Add(request);
-
-			// Assert
-			result.Should().BeOfType<BadRequestObjectResult>();
-
-			var objectResult = (BadRequestObjectResult)result;
-			objectResult.Should().NotBeNull();
-
-			var errorResponse = (ErrorResponse)objectResult.Value;
-			errorResponse.Should().NotBeNull();
-			errorResponse.ErrorStatus.Should().Be(400);
-			errorResponse.ErrorCode.Should().Be("BadRequest");
-		}
-
 		[Fact]
 		public void Fail_Exception()
 		{

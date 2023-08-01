@@ -4,12 +4,12 @@ namespace CalculatorService.Application
 {
 	public class Calculator : ICalculator
 	{
-		public double? Add(params double[] addends)
+		public double Add(params double[] addends)
 		{
-			if (addends?.Length >= 2)
+			if (addends?.Length >= 1)
 				return addends.Sum();
 			else
-				return null;
+				return 0;
 		}
 
 		public double Sub(double minuend, double subtrahend)
@@ -27,9 +27,6 @@ namespace CalculatorService.Application
 
 		public (int, int) Div(int dividend, int divisor)
 		{
-			if (dividend == 0)
-				throw new DivideByZeroException();
-
 			int quotient = dividend / divisor;
 			int remainder = dividend % divisor;
 

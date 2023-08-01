@@ -26,15 +26,8 @@ namespace CalculatorService.Api.Controllers
 				{
 					double? result = _calculator.Add(request.Addends);
 
-					if (result.HasValue)
-					{
-						var response = new AddResponse { Sum = result.Value };
-						return Ok(response);
-					}
-					else
-					{
-						return BadRequest(ErrorResponse.BadRequest("Insufficient addends"));
-					}
+					var response = new AddResponse { Sum = result.Value };
+					return Ok(response);
 				}
 				else
 				{
@@ -113,23 +106,26 @@ namespace CalculatorService.Api.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					(int, int) result = _calculator.Div(request.Dividend, request.Divisor);
-
-					var response = new DivResponse
+					if (request.Divisor != 0)
 					{
-						Quotient = result.Item1,
-						Remainder = result.Item2
-					};
-					return Ok(response);
+						(int, int) result = _calculator.Div(request.Dividend, request.Divisor);
+
+						var response = new DivResponse
+						{
+							Quotient = result.Item1,
+							Remainder = result.Item2
+						};
+						return Ok(response);
+					}
+					else
+					{
+						return BadRequest(ErrorResponse.BadRequest("Divison by zero attempt"));
+					}					
 				}
 				else
 				{
 					return BadRequest(ErrorResponse.BadRequest(ModelState));
 				}
-			}
-			catch (DivideByZeroException ex)
-			{
-				return BadRequest(ErrorResponse.BadRequest("Unable to divide by zero"));
 			}
 			catch (Exception ex)
 			{

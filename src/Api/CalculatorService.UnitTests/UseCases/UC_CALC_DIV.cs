@@ -69,7 +69,7 @@ namespace CalculatorService.UnitTests.UseCases
 			errorResponse.Should().NotBeNull();
 			errorResponse.ErrorStatus.Should().Be(400);
 			errorResponse.ErrorCode.Should().Be("BadRequest");
-			errorResponse.ErrorMessage.Should().Be("Unable to divide by zero");
+			errorResponse.ErrorMessage.Should().Be("Divison by zero attempt");
 		}
 
 		[Fact]

@@ -7,7 +7,7 @@
 		/// </summary>
 		/// <param name="addends">Array that contains addends to be sum</param>
 		/// <returns>If there are two or more addends returns the corresponding sum, returns null otherwise</returns>
-		double? Add(params double[] addends);
+		double Add(params double[] addends);
 
 		/// <summary>
 		/// Returns the difference of two numbers
