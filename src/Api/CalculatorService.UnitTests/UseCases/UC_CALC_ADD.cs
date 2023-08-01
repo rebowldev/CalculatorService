@@ -5,13 +5,17 @@ using CalculatorService.Interfaces.Application;
 using CalculatorService.Model.DTO;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 
 namespace CalculatorService.UnitTests.UseCases
 {
 	public class UC_CALC_ADD
     {
-        [Theory]
+		private readonly ILoggerFactory _loggerFactory = new NullLoggerFactory();
+
+		[Theory]
         [InlineData(0, 0)]
 		[InlineData(-123.96632, 5.9)]
 		[InlineData(double.MinValue, double.MinValue)]
@@ -19,7 +23,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Success_TwoAddends(double addend1, double addend2)
         {
             // Arrange
-            var controller = new CalculatorController(new Calculator());
+            var controller = new CalculatorController(new Calculator(), _loggerFactory);
             var request = new AddRequest
             {
                 Addends = new double[] { addend1, addend2 }
@@ -46,7 +50,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Success_MoreThanTwoAddends(double[] addends)
 		{
 			// Arrange
-			var controller = new CalculatorController(new Calculator());
+			var controller = new CalculatorController(new Calculator(), _loggerFactory);
 			var request = new AddRequest
 			{
 				Addends = addends
@@ -71,7 +75,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Fail_LessThanTwoAddends(double[] addends)
 		{
 			// Arrange
-			var controller = new CalculatorController(new Calculator());
+			var controller = new CalculatorController(new Calculator(), _loggerFactory);
 			var request = new AddRequest
 			{
 				Addends = addends
@@ -100,7 +104,7 @@ namespace CalculatorService.UnitTests.UseCases
 
 			var calculatorMock = new Mock<ICalculator>();
 			calculatorMock.Setup(x => x.Add(It.IsAny<double[]>())).Throws(new ApplicationException(exceptionMessage));
-			var controller = new CalculatorController(calculatorMock.Object);
+			var controller = new CalculatorController(calculatorMock.Object, _loggerFactory);
 			var request = new AddRequest
 			{
 				Addends = new double[] { 0, 0 }

@@ -4,11 +4,15 @@ using CalculatorService.Model.DTO;
 using CalculatorService.Tracker;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace CalculatorService.UnitTests.UseCases
 {
 	public class UC_JOURNAL_QUERY
 	{
+		private Mock<ILoggerFactory> _logger = new Mock<ILoggerFactory>();
+
 		[Fact]
 		public async Task QueryOperations()
 		{
@@ -21,7 +25,7 @@ namespace CalculatorService.UnitTests.UseCases
 			await tracker.SaveOperation("2", new OperationInfo { Operation = "Sqrt", Calculation = "", Date = DateTime.UtcNow });
 			await tracker.SaveOperation("2", new OperationInfo { Operation = "Sum", Calculation = "", Date = DateTime.UtcNow });
 			await tracker.SaveOperation("3", new OperationInfo { Operation = "Div", Calculation = "", Date = DateTime.UtcNow });
-			var controller = new JournalController(tracker);
+			var controller = new JournalController(tracker, _logger.Object);
 
 			var request = new JournalRequest { Id = targetTrackerId };
 

@@ -5,12 +5,16 @@ using CalculatorService.Interfaces.Application;
 using CalculatorService.Model.DTO;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 
 namespace CalculatorService.UnitTests.UseCases
 {
 	public class UC_CALC_SUB
 	{
+		private readonly ILoggerFactory _loggerFactory = new NullLoggerFactory();
+
 		[Theory]
 		[InlineData(0, 0)]
 		[InlineData(3, -7)]
@@ -20,7 +24,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Success(double minuend, double subtrahend)
 		{
 			// Arrange
-			var controller = new CalculatorController(new Calculator());
+			var controller = new CalculatorController(new Calculator(), _loggerFactory);
 			var request = new SubRequest
 			{
 				Minuend = minuend,
@@ -48,7 +52,7 @@ namespace CalculatorService.UnitTests.UseCases
 
 			var calculatorMock = new Mock<ICalculator>();
 			calculatorMock.Setup(x => x.Sub(It.IsAny<double>(), It.IsAny<double>())).Throws(new ApplicationException(exceptionMessage));
-			var controller = new CalculatorController(calculatorMock.Object);
+			var controller = new CalculatorController(calculatorMock.Object, _loggerFactory);
 			var request = new SubRequest
 			{
 				Minuend = 0,

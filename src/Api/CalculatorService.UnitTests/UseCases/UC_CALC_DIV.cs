@@ -5,12 +5,16 @@ using CalculatorService.Interfaces.Application;
 using CalculatorService.Model.DTO;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 
 namespace CalculatorService.UnitTests.UseCases
 {
 	public class UC_CALC_DIV
 	{
+		private readonly ILoggerFactory _loggerFactory = new NullLoggerFactory();
+
 		[Theory]
 		[InlineData(11, -2)]
 		[InlineData(int.MaxValue, int.MaxValue)]
@@ -19,7 +23,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Success(int dividend, int divisor)
 		{
 			// Arrange
-			var controller = new CalculatorController(new Calculator());
+			var controller = new CalculatorController(new Calculator(), _loggerFactory);
 			var request = new DivRequest
 			{
 				Dividend = dividend,
@@ -45,7 +49,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Fail_DivisonByZero()
 		{
 			// Arrange
-			var controller = new CalculatorController(new Calculator());
+			var controller = new CalculatorController(new Calculator(), _loggerFactory);
 			var request = new DivRequest
 			{
 				Dividend = 1,
@@ -76,7 +80,7 @@ namespace CalculatorService.UnitTests.UseCases
 
 			var calculatorMock = new Mock<ICalculator>();
 			calculatorMock.Setup(x => x.Div(It.IsAny<int>(), It.IsAny<int>())).Throws(new ApplicationException(exceptionMessage));
-			var controller = new CalculatorController(calculatorMock.Object);
+			var controller = new CalculatorController(calculatorMock.Object, _loggerFactory);
 			var request = new DivRequest
 			{
 				Dividend = 0,
