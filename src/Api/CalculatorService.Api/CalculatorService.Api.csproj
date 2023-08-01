@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\CalculatorService.Model\CalculatorService.Model.csproj" />
     <ProjectReference Include="..\CalculatorService.Application\CalculatorService.Application.csproj" />
     <ProjectReference Include="..\CalculatorService.Interfaces\CalculatorService.Interfaces.csproj" />
-    <ProjectReference Include="..\CalculatorService.Model\CalculatorService.Model.csproj" />
     <ProjectReference Include="..\CalculatorService.Tracker\CalculatorService.Tracker.csproj" />
   </ItemGroup>
 
