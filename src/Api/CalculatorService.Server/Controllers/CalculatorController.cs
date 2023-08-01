@@ -2,7 +2,7 @@
 using CalculatorService.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CalculatorService.Api.Controllers
+namespace CalculatorService.Server.Controllers
 {
 	[Route("calculator")]
 	[ApiController]

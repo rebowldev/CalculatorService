@@ -1,6 +1,6 @@
-﻿using CalculatorService.Api.Middlewares;
+﻿using CalculatorService.Server.Middlewares;
 
-namespace CalculatorService.Api.Extensions
+namespace CalculatorService.Server.Extensions
 {
 	public static class MiddlewareExtensions
     {

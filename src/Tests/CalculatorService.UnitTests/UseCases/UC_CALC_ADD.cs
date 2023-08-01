@@ -1,8 +1,8 @@
-using CalculatorService.Api;
-using CalculatorService.Api.Controllers;
 using CalculatorService.Application;
 using CalculatorService.Interfaces.Application;
 using CalculatorService.Model.DTO;
+using CalculatorService.Server;
+using CalculatorService.Server.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

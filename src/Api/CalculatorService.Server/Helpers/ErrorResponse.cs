@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Net;
 
-namespace CalculatorService.Api
+namespace CalculatorService.Server
 {
 	public class ErrorResponse
 	{

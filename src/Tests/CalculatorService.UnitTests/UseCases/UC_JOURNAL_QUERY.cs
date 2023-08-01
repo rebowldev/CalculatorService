@@ -1,4 +1,4 @@
-﻿using CalculatorService.Api.Controllers;
+﻿using CalculatorService.Server.Controllers;
 using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
 using CalculatorService.Tracker;

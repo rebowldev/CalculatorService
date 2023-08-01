@@ -1,9 +1,9 @@
-using CalculatorService.Api.Extensions;
-using CalculatorService.Api.Filters;
 using CalculatorService.Application;
 using CalculatorService.Interfaces.Application;
 using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
+using CalculatorService.Server.Extensions;
+using CalculatorService.Server.Filters;
 using CalculatorService.Tracker;
 using NLog.Web;
 

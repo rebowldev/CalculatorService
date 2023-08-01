@@ -3,7 +3,7 @@ using CalculatorService.Model.DTO;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace CalculatorService.Api.Filters
+namespace CalculatorService.Server.Filters
 {
 	public class JournalTrackingFilter : IOperationFilter
 	{

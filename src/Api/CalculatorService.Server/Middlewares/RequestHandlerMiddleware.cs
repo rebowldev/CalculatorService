@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
-namespace CalculatorService.Api.Middlewares
+namespace CalculatorService.Server.Middlewares
 {
 	// TODO: Refactor since it does not meet Single Responsability principle
 	public class RequestHandlerMiddleware
