@@ -13,7 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ICalculator, Calculator>();
 builder.Services.AddSingleton<ITrackerService<OperationInfo>, InMemoryTrackerService<OperationInfo>>();
 
-builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
+builder.Services.AddControllers()
+	.AddXmlSerializerFormatters()
+	.AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config => config.OperationFilter<JournalTrackingFilter>());

@@ -18,6 +18,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("query"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public async Task<IActionResult> Query([FromBody] JournalRequest request, [FromQuery] string? format = "json")
 		{
 			try

@@ -18,6 +18,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("add"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public IActionResult Add([FromBody] AddRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -43,6 +45,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("sub"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public IActionResult Sub([FromBody] SubRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -68,6 +72,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("mult"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public IActionResult Mult([FromBody] MultRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -100,6 +106,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("div"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public IActionResult Div([FromBody] DivRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -136,6 +144,8 @@ namespace CalculatorService.Server.Controllers
 		}
 
 		[HttpPost("sqrt"), FormatFilter]
+		[Consumes("application/json", "application/xml")]
+		[Produces("application/json", "application/xml")]
 		public IActionResult Sqrt([FromBody] SqrtRequest request, [FromQuery] string? format = "json")
 		{
 			try
