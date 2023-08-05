@@ -1,19 +1,27 @@
-﻿namespace CalculatorService.Model.DTO
+﻿using System.Text.Json.Serialization;
+
+namespace CalculatorService.Model.DTO
 {
 	public class JournalResponse
 	{
-		public JournalResponse(List<OperationInfo> operations)
+		public JournalResponse(OperationInfo[] operations)
 		{
-			Operations = operations ?? new List<OperationInfo>();
+			Operations = operations ?? new OperationInfo[0];
 		}
 
-		public List<OperationInfo> Operations { get; set; } = new List<OperationInfo>();
+		[JsonPropertyName("Operations")]
+		public OperationInfo[] Operations { get; set; }
 	}
 
 	public class OperationInfo
 	{
+		[JsonPropertyName("Operation")]
 		public string Operation { get; set; } = string.Empty;
+
+		[JsonPropertyName("Calculation")]
 		public string Calculation { get; set; } = string.Empty;
+
+		[JsonPropertyName("Date")]
 		public DateTime Date { get; set; }
 	}
 }

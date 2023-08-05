@@ -32,7 +32,7 @@ namespace CalculatorService.Server.Middlewares
 			await ProcessRequestAndResponse(context);
 
 			if (context.Request.Method != "OPTIONS")
-				await LogRequest(context.Request.Path, context.Response.StatusCode);
+				LogRequest(context.Request.Path, context.Response.StatusCode);
 
 			if (context.Request.Headers.TryGetValue(_trackerService.HeaderKey, out var trackerId))
 			{
@@ -48,7 +48,7 @@ namespace CalculatorService.Server.Middlewares
 			}
 		}
 
-		private async ValueTask LogRequest(string path, int statusCode)
+		private void LogRequest(string path, int statusCode)
 		{
 			string message = $"{path} | Request: {_requestBody} | Response: {_responseBody}";
 
@@ -99,7 +99,7 @@ namespace CalculatorService.Server.Middlewares
 			OperationInfo operation = new OperationInfo
 			{
 				Operation = name,
-				Calculation = $"{request.ToString()} = {response.ToString()}",
+				Calculation = $"{request} = {response}",
 				Date = DateTime.UtcNow
 			};
 

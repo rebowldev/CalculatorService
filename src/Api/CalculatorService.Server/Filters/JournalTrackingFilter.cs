@@ -16,7 +16,8 @@ namespace CalculatorService.Server.Filters
 
 		public void Apply(OpenApiOperation operation, OperationFilterContext context)
 		{
-			if (context.ApiDescription.RelativePath.StartsWith("calculator"))
+			if (!string.IsNullOrEmpty(context.ApiDescription.RelativePath) &&
+				context.ApiDescription.RelativePath.StartsWith("calculator"))
 			{
 				if (operation.Parameters == null)
 					operation.Parameters = new List<OpenApiParameter>();

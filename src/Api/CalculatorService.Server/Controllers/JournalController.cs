@@ -25,7 +25,7 @@ namespace CalculatorService.Server.Controllers
 				if (ModelState.IsValid)
 				{
 					List<OperationInfo> result = await _trackerService.GetOperationsByTracker(request.Id);
-					var response = new JournalResponse(result);
+					var response = new JournalResponse(result.ToArray());
 					return Ok(response);
 				}
 				else

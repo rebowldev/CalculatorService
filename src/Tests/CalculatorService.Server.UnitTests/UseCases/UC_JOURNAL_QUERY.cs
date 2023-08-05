@@ -1,6 +1,6 @@
-﻿using CalculatorService.Server.Controllers;
-using CalculatorService.Interfaces.Infrastructure;
+﻿using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
+using CalculatorService.Server.Controllers;
 using CalculatorService.Tracker;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +39,7 @@ namespace CalculatorService.UnitTests.UseCases
 			objectResult.Should().NotBeNull();
 			objectResult.Value.Should().NotBeNull();
 			objectResult.Value.Should().BeOfType<JournalResponse>();
-			((JournalResponse)objectResult.Value).Operations.Count.Should().Be(2);
+			((JournalResponse)objectResult.Value).Operations.Length.Should().Be(2);
 		}
 
 		[Fact]
