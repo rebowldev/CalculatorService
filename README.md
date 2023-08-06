@@ -10,7 +10,7 @@ The supported arithmetic operations are:
 * Division (div): Divides two **integers** and return the quotient and the remainder.
 * Square root (sqrt): Calculates the square root of a decimal number and returns the result.
 
-In addition, it supports to trace the desired operations within a stored journal that could be retrieved using the following operation:
+In addition, it supports to trace the desired operations within a journal that could be retrieved using the following operation:
 
 * Journal: Given a tracking ID it returns all tracked operations.
 
@@ -142,3 +142,9 @@ The system will run a command prompt, enter "help" to see available commands, or
 ```
 
 Available commands: add, sub, mult, div, sqrt, journal
+
+## Journal storage
+
+The current implementation stores the tracked operations in memory, so all the stored data will be lost once the Server is shut down.
+
+Other storages such databases or file system could be added implementing the interface "ITrackerService\<T\>"
