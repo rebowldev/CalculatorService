@@ -1,6 +1,7 @@
 ﻿using CalculatorService.Interfaces.Application;
 using CalculatorService.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CalculatorService.Server.Controllers
 {
@@ -20,6 +21,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("add"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(AddResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Add([FromBody] AddRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -47,6 +51,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("sub"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(SubResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Sub([FromBody] SubRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -74,6 +81,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("mult"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(MultResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Mult([FromBody] MultRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -108,6 +118,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("div"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(DivResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Div([FromBody] DivRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -146,6 +159,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("sqrt"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(SqrtResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Sqrt([FromBody] SqrtRequest request, [FromQuery] string? format = "json")
 		{
 			try

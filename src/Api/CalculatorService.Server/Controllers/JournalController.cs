@@ -1,6 +1,7 @@
 ﻿using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CalculatorService.Server.Controllers
 {
@@ -20,6 +21,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("query"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(JournalResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public async Task<IActionResult> Query([FromBody] JournalRequest request, [FromQuery] string? format = "json")
 		{
 			try
