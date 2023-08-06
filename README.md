@@ -1,11 +1,11 @@
 # CalculatorService
 
-HTTP/REST­based 'Calculator Service’ capable of some basic arithmetic operations, like add, subtract, square, etc. along with a history
+HTTP/REST ­based 'Calculator Service’ capable of some basic arithmetic operations, like add, subtract, square, etc. along with a history
 service keeping track of requests sharing a common an identifier.
 
 ## Architecture & Components
 
-The solution consists of two main components of the delivered application:
+The solution consists of two main components:
 
 - CalculatorService.Server: The main component of the application, and the one actually implementing the 'calculator service’ HTTP/REST interface & business logic.
 - CalculatorService.Client: A demonstration console/command­line client, capable of performing requests to the main HTTP service from CLI
