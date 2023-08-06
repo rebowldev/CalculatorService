@@ -3,7 +3,12 @@
 namespace CalculatorService.Model.DTO
 {
 	public class JournalResponse
-	{
+	{ 
+		public JournalResponse()
+		{
+			Operations = new OperationInfo[0];
+		}
+
 		public JournalResponse(OperationInfo[] operations)
 		{
 			Operations = operations ?? new OperationInfo[0];
