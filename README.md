@@ -1,6 +1,6 @@
 # CalculatorService
 
-HTTP/REST ­based 'Calculator Service’ capable of some basic arithmetic operations along with a history service keeping track of requests sharing a common an identifier.
+HTTP/REST ­based 'Calculator Service’ capable of some basic arithmetic operations along with a history service keeping track of requests sharing a common  identifier.
 
 The supported arithmetic operations are:
 
@@ -113,7 +113,11 @@ The API reference documententation will be available using:
 All endpoints accept JSON or XML formats:
 
 * Requests: By setting Content-Type header to "application/json" or "application/xml"
-* Responses: By setting "format" query parameter to "json" or "xml (i.e. /calculator/add?format=xml). Default response format is JSON.
+* Responses: By setting optional "format" query parameter to "json" or "xml (i.e. /calculator/add?format=xml). Default response format is JSON.
+
+### Logging
+
+Server API logs requests and responses information to console and file. For logging to file it uses NLog implementation using daily file rotation. It keeps up to 100 log files. To modify NLog configuration use nlog.config file.
 
 ## Client Usage
 
