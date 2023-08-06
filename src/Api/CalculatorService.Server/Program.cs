@@ -2,9 +2,11 @@ using CalculatorService.Application;
 using CalculatorService.Interfaces.Application;
 using CalculatorService.Interfaces.Infrastructure;
 using CalculatorService.Model.DTO;
+using CalculatorService.Server;
 using CalculatorService.Server.Extensions;
 using CalculatorService.Server.Filters;
 using CalculatorService.Tracker;
+using Microsoft.AspNetCore.Mvc;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,10 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config => config.OperationFilter<JournalTrackingFilter>());
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+	options.InvalidModelStateResponseFactory = actionContext =>
+		new BadRequestObjectResult(ErrorResponse.BadRequest(actionContext.ModelState)));
 
 builder.Host.UseNLog();
 
@@ -41,3 +47,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

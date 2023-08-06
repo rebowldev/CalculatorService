@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
+using System.Net;
 
 namespace CalculatorService.UnitTests.UseCases
 {
@@ -76,7 +77,7 @@ namespace CalculatorService.UnitTests.UseCases
 		public void Fail_Exception()
 		{
 			// Arrange
-			string exceptionMessage = "Unexpected error";
+			string exceptionMessage = "unexpected error";
 
 			var calculatorMock = new Mock<ICalculator>();
 			calculatorMock.Setup(x => x.Div(It.IsAny<int>(), It.IsAny<int>())).Throws(new ApplicationException(exceptionMessage));
@@ -98,9 +99,9 @@ namespace CalculatorService.UnitTests.UseCases
 
 			var errorResponse = (ErrorResponse)objectResult.Value;
 			errorResponse.Should().NotBeNull();
-			errorResponse.ErrorStatus.Should().Be(500);
+			errorResponse.ErrorStatus.Should().Be((int)HttpStatusCode.InternalServerError);
 			errorResponse.ErrorCode.Should().Be("InternalServerError");
-			errorResponse.ErrorMessage.Should().Be(exceptionMessage);
+			errorResponse.ErrorMessage.Should().Contain(exceptionMessage);
 		}
 	}
 }

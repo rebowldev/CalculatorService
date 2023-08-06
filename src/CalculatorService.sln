@@ -23,9 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorService.Server", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorService.Client", "Client\CalculatorService.Client\CalculatorService.Client.csproj", "{0FD703B4-A55D-4630-AF9C-53914817CDC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorService.Server.UnitTests", "Tests\CalculatorService.Server.UnitTests\CalculatorService.Server.UnitTests.csproj", "{E02AFAE5-0D4B-462A-A6D8-AFF3DA915C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorService.Server.UnitTests", "Tests\CalculatorService.Server.UnitTests\CalculatorService.Server.UnitTests.csproj", "{E02AFAE5-0D4B-462A-A6D8-AFF3DA915C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorService.Client.UnitTests", "Tests\CalculatorService.Client.UnitTests\CalculatorService.Client.UnitTests.csproj", "{00609D96-6DEA-4797-A147-15F20A1DA77B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorService.Client.UnitTests", "Tests\CalculatorService.Client.UnitTests\CalculatorService.Client.UnitTests.csproj", "{00609D96-6DEA-4797-A147-15F20A1DA77B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorService.Server.IntegrationTests", "Tests\CalculatorService.Server.IntegrationTests\CalculatorService.Server.IntegrationTests.csproj", "{136B366F-C762-49DF-9147-EBB8C07D9D91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{00609D96-6DEA-4797-A147-15F20A1DA77B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00609D96-6DEA-4797-A147-15F20A1DA77B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00609D96-6DEA-4797-A147-15F20A1DA77B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{136B366F-C762-49DF-9147-EBB8C07D9D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136B366F-C762-49DF-9147-EBB8C07D9D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136B366F-C762-49DF-9147-EBB8C07D9D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136B366F-C762-49DF-9147-EBB8C07D9D91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{71C90D06-9977-4BF5-BDEF-7EB9873F545C} = {087AEC6C-A6A7-4ED7-8BA3-67B895CB763D}
 		{E02AFAE5-0D4B-462A-A6D8-AFF3DA915C26} = {57904255-6FE4-4BFC-A24F-6F8568729421}
 		{00609D96-6DEA-4797-A147-15F20A1DA77B} = {57904255-6FE4-4BFC-A24F-6F8568729421}
+		{136B366F-C762-49DF-9147-EBB8C07D9D91} = {57904255-6FE4-4BFC-A24F-6F8568729421}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {758C2B12-534C-4B7B-A0DB-06568E623554}

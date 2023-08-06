@@ -20,7 +20,7 @@ namespace CalculatorService.Client.UnitTests.UseCases
 			// Arrange
 			var _consoleMock = new Mock<IConsoleWrapper>();
 			var _serviceClientMock = new Mock<IServiceClient>();
-			double result = factors.Aggregate((double a, double b) => a * b);
+			double result = factors.Aggregate(1, (double a, double b) => a * b);
 
 			Queue<string> inputs = new Queue<string>();
 			inputs.Enqueue("mult " + string.Join(" ", factors));

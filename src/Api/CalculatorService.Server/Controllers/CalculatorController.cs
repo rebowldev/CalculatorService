@@ -2,6 +2,7 @@
 using CalculatorService.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace CalculatorService.Server.Controllers
 {
@@ -21,9 +22,9 @@ namespace CalculatorService.Server.Controllers
 		[HttpPost("add"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(AddResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.OK, Description = "Operation success", Type = typeof(AddResponse))]
+		[SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Add([FromBody] AddRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -43,17 +44,16 @@ namespace CalculatorService.Server.Controllers
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
-				// TODO: Should not return exception details to client
-				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+				return StatusCode((int)HttpStatusCode.InternalServerError, ErrorResponse.InternalServerError());
 			}
 		}
 
 		[HttpPost("sub"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(SubResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.OK, Description = "Operation success", Type = typeof(SubResponse))]
+		[SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Sub([FromBody] SubRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -73,17 +73,16 @@ namespace CalculatorService.Server.Controllers
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
-				// TODO: Should not return exception details to client
-				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+				return StatusCode((int)HttpStatusCode.InternalServerError, ErrorResponse.InternalServerError());
 			}
 		}
 
 		[HttpPost("mult"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(MultResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.OK, Description = "Operation success", Type = typeof(MultResponse))]
+		[SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Mult([FromBody] MultRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -110,17 +109,16 @@ namespace CalculatorService.Server.Controllers
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
-				// TODO: Should not return exception details to client
-				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+				return StatusCode((int)HttpStatusCode.InternalServerError, ErrorResponse.InternalServerError());
 			}
 		}
 
 		[HttpPost("div"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(DivResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.OK, Description = "Operation success", Type = typeof(DivResponse))]
+		[SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Div([FromBody] DivRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -151,17 +149,16 @@ namespace CalculatorService.Server.Controllers
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
-				// TODO: Should not return exception details to client
-				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+				return StatusCode((int)HttpStatusCode.InternalServerError, ErrorResponse.InternalServerError());
 			}
 		}
 
 		[HttpPost("sqrt"), FormatFilter]
 		[Consumes("application/json", "application/xml")]
 		[Produces("application/json", "application/xml")]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.OK, Description = "Operation success", Type = typeof(SqrtResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
-		[SwaggerResponse((int)System.Net.HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.OK, Description = "Operation success", Type = typeof(SqrtResponse))]
+		[SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "BadRequest", Type = typeof(ErrorResponse))]
+		[SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Unexpected error", Type = typeof(ErrorResponse))]
 		public IActionResult Sqrt([FromBody] SqrtRequest request, [FromQuery] string? format = "json")
 		{
 			try
@@ -181,8 +178,7 @@ namespace CalculatorService.Server.Controllers
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
-				// TODO: Should not return exception details to client
-				return StatusCode(500, ErrorResponse.InternalServerError(ex.Message));
+				return StatusCode((int)HttpStatusCode.InternalServerError, ErrorResponse.InternalServerError());
 			}
 		}
 	}
