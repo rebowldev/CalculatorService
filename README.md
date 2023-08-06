@@ -58,7 +58,7 @@ It will run 3 test projects:
 * Unit tests
   * CalculatorService.Server.UnitTests
   * CalculatorService.Client.UnitTests
-* Integrationnit tests
+* Integration tests
   * CalculatorService.Server.IntegrationTests
 
 ## Deploy Server
@@ -107,6 +107,13 @@ The API reference documententation will be available using:
 
 * SwaggerUI: https://localhost:5001/swagger/index.html
 * OpenAPI specification v3.0.1: https://localhost:5001/swagger/v1/swagger.json
+
+### Serialization formats
+
+All endpoints accept JSON or XML formats:
+
+* Requests: By setting Content-Type header to "application/json" or "application/xml"
+* Responses: By setting "format" query parameter to "json" or "xml (i.e. /calculator/add?format=xml). Default response format is JSON.
 
 ## Client Usage
 
