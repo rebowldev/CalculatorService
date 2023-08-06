@@ -1,7 +1,18 @@
 # CalculatorService
 
-HTTP/REST ­based 'Calculator Service’ capable of some basic arithmetic operations, like add, subtract, square, etc. along with a history
-service keeping track of requests sharing a common an identifier.
+HTTP/REST ­based 'Calculator Service’ capable of some basic arithmetic operations along with a history service keeping track of requests sharing a common an identifier.
+
+The supported arithmetic operations are:
+
+* Addition (add): adds two or mor decimal numbers and returns their sum.
+* Substraction (sub): substracts two decimal numbers and returns the difference.
+* Multiplication (mult): multiplies two or more decimal numbers and returns their product.
+* Division (div): Divides two **integers** and return the quotient and the remainder.
+* Square root (sqrt): Calculates the square root of a decimal number and returns the result.
+
+In addition, it supports to trace the desired operations within a stored journal that could be retrieved using the following operation:
+
+* Journal: Given a tracking ID it returns all tracked operations.
 
 ## Architecture & Components
 
