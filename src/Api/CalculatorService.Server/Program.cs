@@ -30,12 +30,8 @@ builder.Host.UseNLog();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Use middleware that handles loggin and operations tracking
 app.UseRequestHandlerMiddleware();
